@@ -1,32 +1,44 @@
-const http=require("http");
-const server = http.createServer((req,res)=>{
-    console.log("Server is created");
+const http = require("http")
+const server=http.createServer((req,res)=>
+{
+    const url = req.url;
+    const method = req.method;
 
-    res.setHeader("Content-Type","text/html");
-    if(req.url=="/home")
+    if(req.url==='/')
     {
-       res.statusCode=200; 
-       res.end("<h1>Welcome home</h1>") 
-    }
-    else if(req.url=="/about")
-    {
-        res.statusCode=200;
-        res.end("<h1>Welcome to About Us</h1>");
-    }
-    else if(req.url=="/node")
-    {
-        res.statusCode=200;
-        res.end("<h1>Welcome to my Node Js project</h1>")
+        //form
+        res.setHeader('Content-Type','text/html');
+
+        res.end(`
+            <form action="/message" method="POST">
+                <label>Name:</label>
+                <input type="text" name="username"></input>
+                <button type="submit">Add</button>
+            </form>
+        `);
     }
     else
     {
-        res.statusCode=404;
-        res.end("<h1>Page not found</h1>");
-    }
-    })
+        if(req.url=='/message' && method === "POST")
+        {
+            res.setHeader('Content-Type','text/html');
+            let dataChunks=[];
+            req.on('data',(chunks)=>
+            {
+                console.log(chunks);
+                dataChunks.push(chunks);
+            })
 
-let port = 3000;
-server.listen(port, ()=>
+            req.on("end",()=>{
+                let combineBuffer = Buffer.concat(dataChunks);
+                console.log(combineBuffer.toString());
+            });
+        }
+    }
+
+});
+
+server.listen(5000,()=>
 {
-    console.log("Server is running");
+    console.log("server is running");
 });
