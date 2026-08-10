@@ -1,17 +1,30 @@
 {
-  "name": "nodejs_implementation",
+  "name": "pinks",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
+  "description": "this is my first project",
   "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/PinkyGupta30/nodeserver#readme",
+  "bugs": {
+    "url": "https://github.com/PinkyGupta30/nodeserver/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PinkyGupta30/nodeserver.git"
+  },
   "license": "ISC",
+  "author": "Pinky Gupta",
   "type": "commonjs",
+  "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node app.js",
+  "dev": "nodemon app.js"
+},
   "dependencies": {
+    "fs": "^0.0.1-security",
     "http": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
